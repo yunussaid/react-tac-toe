@@ -100,7 +100,10 @@ export default function Game() {
     });
 
     function jumpTo(move) {
-        setSquares(history[move]);
+        const nextSquares = history[move];
+        const winner = checkWinner(nextSquares);
+        if (winner) { return; } 
+        setSquares(nextSquares);
         const nextTurn = move % 2 === 0 ? "X" : "O";
         setTurn(nextTurn);
         setHistory(history.slice(0, move + 1));
